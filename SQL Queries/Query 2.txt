@@ -1,0 +1,27 @@
+mysql> CREATE DATABASE employee_database;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE TABLE employees (
+		-> employee_id INT PRIMARY KEY,
+		-> name VARCHAR(255),
+		-> salary DECIMAL(10, 2),
+		-> department VARCHAR(255)
+		-> );
+		Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO employees (employee_id, name, salary, department)
+    -> VALUES (1, 'Alice', 50000, 'Marketing');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> UPDATE employees
+    -> SET salary = 55000
+    -> WHERE employee_id = 1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> DELETE FROM employees
+    -> WHERE employee_id = 1;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM employees;
+Empty set (0.00 sec)

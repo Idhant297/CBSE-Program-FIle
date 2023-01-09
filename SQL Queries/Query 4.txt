@@ -1,0 +1,85 @@
+mysql> CREATE DATABASE sales_database;
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> CREATE TABLE sales (
+    -> sale_id INT PRIMARY KEY,
+    -> product_id INT,
+    -> date DATE,
+    -> quantity INT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> CREATE TABLE products (
+    -> product_id INT PRIMARY KEY,
+    -> name VARCHAR(255),
+    -> price DECIMAL(10, 2)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> INSERT INTO products (product_id, name, price)
+    -> VALUES (1, 'Computer', 1000),
+    ->        (2, 'Monitor', 500),
+    ->        (3, 'Keyboard', 100);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO sales (sale_id, product_id, date, quantity)
+    -> VALUES (1, 1, '2022-01-01', 2),
+    ->        (2, 2, '2022-01-02', 3),
+    ->        (3, 3, '2022-01-03', 1);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+
+mysql> UPDATE sales
+    -> SET quantity = 3
+    -> WHERE sale_id = 1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+mysql> SELECT p.name, s.quantity FROM products p
+    -> INNER JOIN sales s ON p.product_id = s.product_id;
++----------+----------+
+| name     | quantity |
++----------+----------+
+| Computer |        3 |
+| Monitor  |        3 |
+| Keyboard |        1 |
++----------+----------+
+3 rows in set (0.00 sec)
+
+
+mysql> SELECT SUM(p.price * s.quantity) FROM products p
+    -> INNER JOIN sales s ON p.product_id = s.product_id;
++---------------------------+
+| SUM(p.price * s.quantity) |
++---------------------------+
+|                   4600.00 |
++---------------------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT SUM(s.quantity) FROM sales s
+    -> INNER JOIN products p ON s.product_id = p.product_id
+    -> WHERE p.name = 'Computer';
++-----------------+
+| SUM(s.quantity) |
++-----------------+
+|               3 |
++-----------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT SUM(p.price * s.quantity) FROM products p
+    -> INNER JOIN sales s ON p.product_id = s.product_id
+    -> WHERE s.date = '2022-01-01';
++---------------------------+
+| SUM(p.price * s.quantity) |
++---------------------------+
+|                   3000.00 |
++---------------------------+
+1 row in set (0.00 sec)

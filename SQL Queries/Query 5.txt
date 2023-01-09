@@ -1,0 +1,47 @@
+mysql> CREATE DATABASE movie_database;
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> CREATE TABLE movies (
+    -> movie_id INT PRIMARY KEY,
+    -> title VARCHAR(255),
+    -> release_year INT,
+    -> genre VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> INSERT INTO movies (movie_id, title, release_year, genre)
+    -> VALUES (1, 'The Matrix', 1999, 'Sci-fi'),
+    ->         (2, '2001: A Space Odyssey', 1968, 'Sci-fi'),
+    ->         (3, 'Interstellar', 2014, 'Sci-fi'),
+    ->         (4, 'ted', 2012, 'Comedy'),
+    ->         (5, 'Fast and Furious', 2015, 'Action');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+mysql> UPDATE movies
+    -> SET release_year = 2016
+    -> WHERE movie_id = 5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+mysql> UPDATE movies
+    -> SET release_year = 2016
+    -> WHERE movie_id = 5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+mysql> SELECT * FROM movies
+    -> WHERE genre = 'Sci-fi';
++----------+-----------------------+--------------+--------+
+| movie_id | title                 | release_year | genre  |
++----------+-----------------------+--------------+--------+
+|        1 | The Matrix            |         1999 | Sci-fi |
+|        2 | 2001: A Space Odyssey |         1968 | Sci-fi |
+|        3 | Interstellar          |         2014 | Sci-fi |
++----------+-----------------------+--------------+--------+
+3 rows in set (0.00 sec)

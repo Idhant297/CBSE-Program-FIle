@@ -1,0 +1,20 @@
+mysql> CREATE DATABASE school;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CREATE TABLE students (
+    -> id INTEGER PRIMARY KEY,
+    -> name VARCHAR(255),
+    -> grade INTEGER
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+INSERT INTO students (id, name, grade) VALUES (1, 'Alice', 10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM students;
++----+-------+-------+
+| id | name  | grade |
++----+-------+-------+
+|  1 | Alice |    10 |
++----+-------+-------+
+1 row in set (0.00 sec)

@@ -1,0 +1,103 @@
+mysql> CREATE DATABASE order_database;
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY,
+    -> customer_id INT,
+    -> product_id INT,
+    -> quantity INT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> CREATE TABLE customers (
+    -> customer_id INT PRIMARY KEY,
+    -> name VARCHAR(255),
+    -> address VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> CREATE TABLE customers (
+    -> customer_id INT PRIMARY KEY,
+    -> name VARCHAR(255),
+    -> address VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> CREATE TABLE products (
+    -> product_id INT PRIMARY KEY,
+    -> name VARCHAR(255),
+    -> price DECIMAL(10, 2)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> INSERT INTO customers (customer_id, name, address)
+    -> VALUES (1, 'Alice', '123 Main Street'),
+    ->        (2, 'Bob', '456 Market Street');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO products (product_id, name, price)
+    -> VALUES (1, 'Computer', 1000),
+    ->        (2, 'Monitor', 500),
+    ->        (3, 'Keyboard', 100);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+
+mysql> INSERT INTO customers (customer_id, name, address)
+    -> VALUES (1, 'Alice', '123 Main Street'),
+    ->        (2, 'Bob', '456 Market Street');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+mysql> INSERT INTO products (product_id, name, price)
+    -> VALUES (1, 'Computer', 1000),
+    ->        (2, 'Monitor', 500),
+    ->        (3, 'Keyboard', 100);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT c.name, c.address FROM customers c
+    -> INNER JOIN orders o ON c.customer_id = o.customer_id;
++-------+-----------------+
+| name  | address         |
++-------+-----------------+
+| Alice | 123 Main Street |
++-------+-----------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT p.name, o.quantity FROM products p
+    -> INNER JOIN orders o ON p.product_id = o.product_id;
++---------+----------+
+| name    | quantity |
++---------+----------+
+| Monitor |        3 |
++---------+----------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT p.name, o.quantity FROM products p
+    -> INNER JOIN orders o ON p.product_id = o.product_id;
++---------+----------+
+| name    | quantity |
++---------+----------+
+| Monitor |        3 |
++---------+----------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT SUM(p.price * o.quantity) FROM products p
+    -> INNER JOIN orders o ON p.product_id = o.product_id;
++---------------------------+
+| SUM(p.price * o.quantity) |
++---------------------------+
+|                   1500.00 |
++---------------------------+
+1 row in set (0.00 sec)
